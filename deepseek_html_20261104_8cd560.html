@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>✨ 心镜测试 · 15题探索你的内在能量</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f9f0f5 0%, #f1e6f0 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 12px 24px;
+    }
+
+    .test-card {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      box-shadow: 0 25px 45px rgba(150, 110, 140, 0.15), 0 2px 8px rgba(255, 240, 250, 0.6);
+      padding: 28px 22px 36px;
+      border: 1px solid rgba(255, 230, 245, 0.8);
+      transition: all 0.2s;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #4a2e3f;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .header h1 span {
+      background: linear-gradient(135deg, #c17b9e, #b05f8a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .subhead {
+      color: #9a7b8e;
+      font-size: 0.9rem;
+      font-weight: 400;
+      background: rgba(235, 210, 225, 0.5);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.3px;
+    }
+
+    .progress-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      color: #a47892;
+      font-weight: 500;
+      padding: 0 4px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(220, 195, 210, 0.4);
+      border-radius: 20px;
+      margin-bottom: 28px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 4px rgba(120, 70, 100, 0.1);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #e0a5c2, #c77b9e, #b8608a);
+      border-radius: 20px;
+      transition: width 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+      box-shadow: 0 0 8px #d98fb3;
+    }
+
+    .questions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .question-item {
+      background: #ffffffd9;
+      backdrop-filter: blur(4px);
+      border-radius: 26px;
+      padding: 20px 20px 14px;
+      box-shadow: 0 6px 14px rgba(170, 130, 150, 0.08), 0 1px 4px rgba(255, 255, 255, 0.7);
+      border: 1px solid #f3e0eb;
+      transition: box-shadow 0.2s;
+    }
+
+    .question-item:hover {
+      box-shadow: 0 12px 22px rgba(180, 130, 160, 0.12), 0 2px 6px #fff2fa;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #3d2a35;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+      line-height: 1.5;
+      align-items: flex-start;
+    }
+
+    .q-num {
+      background: #e8d2e0;
+      color: #8d5e78;
+      font-weight: 600;
+      font-size: 0.85rem;
+      min-width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      padding-left: 2px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #faf3f8;
+      padding: 10px 18px 10px 14px;
+      border-radius: 40px;
+      border: 1.5px solid #ebd7e4;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.9rem;
+      color: #55404d;
+      flex: 0 0 auto;
+      user-select: none;
+    }
+
+    .option-label:hover {
+      background: #f5e7f0;
+      border-color: #cfa7c1;
+    }
+
+    .option-label.selected {
+      background: #f1dbeb;
+      border-color: #b86f9a;
+      color: #4a253b;
+      box-shadow: 0 2px 10px rgba(195, 120, 160, 0.25);
+    }
+
+    .option-label input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #cfa7c1;
+      border-radius: 50%;
+      position: relative;
+      transition: 0.1s;
+      margin-right: 2px;
+      flex-shrink: 0;
+    }
+
+    .option-label input[type="radio"]:checked {
+      border-color: #b05f8a;
+      background: #b05f8a;
+      box-shadow: inset 0 0 0 3px #f5e7f0;
+    }
+
+    .option-label input[type="radio"]:disabled {
+      opacity: 0.7;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px 18px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #dca5c1, #b87096);
+      color: white;
+      box-shadow: 0 12px 20px -6px rgba(180, 110, 150, 0.5);
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: scale(1.01);
+      box-shadow: 0 15px 24px -6px #b07499;
+      background: linear-gradient(135deg, #e2b0cb, #b56d94);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+      background: #cfb6c7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-outline {
+      background: #ffffffd0;
+      color: #7a4f69;
+      box-shadow: 0 4px 12px rgba(160, 110, 140, 0.15);
+      border: 1.5px solid #e2c4d7;
+    }
+
+    .btn-outline:hover:not(:disabled) {
+      background: #fbf2f8;
+      box-shadow: 0 8px 18px rgba(180, 120, 160, 0.2);
+    }
+
+    .result-area {
+      background: linear-gradient(145deg, #fff9fd, #fcf0f7);
+      border-radius: 28px;
+      padding: 28px 22px;
+      margin-top: 12px;
+      border: 1px solid #ecd6e5;
+      box-shadow: inset 0 0 0 1px #fff8fd, 0 10px 25px rgba(170, 120, 150, 0.12);
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #4a263b;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .result-sub {
+      text-align: center;
+      color: #a87f99;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .result-description {
+      background: #fffffff0;
+      padding: 18px 16px;
+      border-radius: 24px;
+      color: #4a3542;
+      line-height: 1.65;
+      font-size: 0.98rem;
+      margin-bottom: 22px;
+      border: 1px solid #f2dfec;
+    }
+
+    .result-description p {
+      margin-bottom: 12px;
+    }
+
+    .result-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      color: #ad4c7e;
+      font-weight: 600;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+      padding: 15px 12px;
+      font-size: 1rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: #b294a7;
+      letter-spacing: 0.3px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error-message {
+      text-align: center;
+      color: #b33e6b;
+      background: #ffe6f0;
+      padding: 12px;
+      border-radius: 40px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      border: 1px solid #f7c2d9;
+    }
+
+    @media (max-width: 480px) {
+      .test-card {
+        padding: 20px 14px 28px;
+        border-radius: 28px;
+      }
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      .options {
+        gap: 8px;
+      }
+      .option-label {
+        padding: 8px 12px 8px 10px;
+        font-size: 0.85rem;
+        flex: 1 1 40%;
+        min-width: 90px;
+      }
+      .question-text {
+        font-size: 0.98rem;
+      }
+      .btn-row .btn {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="test-card">
+  <div class="header">
+    <h1>✨ 心镜·能量测试</h1>
+    <div class="subhead">15道题 · 发现你的内在光芒</div>
+  </div>
+
+  <!-- 进度条 -->
+  <div class="progress-area">
+    <span>📋 已完成 <span id="progressText">0</span>/15</span>
+    <span>🌸 轻松选择</span>
+  </div>
+  <div class="progress-bar-bg">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- 测试题表单 -->
+  <form id="quizForm">
+    <div class="questions-container" id="questionsContainer">
+      <!-- 题目由JS动态生成，保证结构整洁 -->
+    </div>
+
+    <!-- 提示错误 / 未完成 -->
+    <div id="errorMessage" class="error-message hidden"></div>
+
+    <!-- 操作按钮 -->
+    <div class="actions" id="actionButtons">
+      <button type="button" class="btn" id="submitBtn">🌟 查看我的测试结果</button>
+      <button type="button" class="btn btn-outline" id="resetBtn">🔄 重新开始</button>
+    </div>
+  </form>
+
+  <!-- 结果展示区 (初始隐藏) -->
+  <div id="resultArea" class="result-area hidden">
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-sub" id="resultSub"></div>
+    <div class="result-description" id="resultDescription"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" id="resultResetBtn" style="flex:2;">🌸 再测一次</button>
+    </div>
+    <div class="footer-note">分享到小红书，让朋友也来测测吧 ✨</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- 15道测试题及选项 ----------
+    // 每道题有4个选项，每个选项带有对应的分值 (1~4)
+    const questionsData = [
+      { text: "当计划被意外打乱时，你通常会？", options: [
+        { label: "迅速调整，寻找新方案", value: 4 },
+        { label: "有点烦躁，但能慢慢适应", value: 3 },
+        { label: "需要时间冷静，暂时不想动", value: 2 },
+        { label: "感到无力，希望别人帮忙", value: 1 }
+      ]},
+      { text: "在社交聚会中，你更像？", options: [
+        { label: "主动认识新朋友，能量满满", value: 4 },
+        { label: "和熟悉的人待在一起更自在", value: 3 },
+        { label: "等别人来和我说话", value: 2 },
+        { label: "觉得疲惫，想早点离开", value: 1 }
+      ]},
+      { text: "面对一个复杂的新任务，你的第一反应是？", options: [
+        { label: "兴奋，想挑战一下", value: 4 },
+        { label: "先理清思路再动手", value: 3 },
+        { label: "有点担忧，怕做不好", value: 2 },
+        { label: "希望有人能带我一起做", value: 1 }
+      ]},
+      { text: "你通常如何恢复能量？", options: [
+        { label: "和朋友聊天、出去玩", value: 4 },
+        { label: "做自己喜欢的小事（看书/听歌）", value: 3 },
+        { label: "一个人安静地待着", value: 2 },
+        { label: "睡一觉或什么都不做", value: 1 }
+      ]},
+      { text: "对于未来的计划，你更倾向于？", options: [
+        { label: "充满期待，经常想象成功画面", value: 4 },
+        { label: "有大致方向，走一步看一步", value: 3 },
+        { label: "顺其自然，不太想太远", value: 2 },
+        { label: "有点迷茫，不太敢想", value: 1 }
+      ]},
+      { text: "当朋友向你倾诉烦恼时，你会？", options: [
+        { label: "耐心倾听，并给出建议", value: 4 },
+        { label: "共情安慰，希望对方开心", value: 3 },
+        { label: "不知道说什么，但会陪着", value: 2 },
+        { label: "觉得有点负担，想转移话题", value: 1 }
+      ]},
+      { text: "你如何看待自己的小缺点？", options: [
+        { label: "接纳它们，这也是我的一部分", value: 4 },
+        { label: "偶尔在意，但不会太纠结", value: 3 },
+        { label: "有时会因此感到自卑", value: 2 },
+        { label: "很难接受，总是想隐藏", value: 1 }
+      ]},
+      { text: "遇到困难时，你更倾向于？", options: [
+        { label: "积极寻找解决办法", value: 4 },
+        { label: "先冷静一下，再想办法", value: 3 },
+        { label: "向信任的人求助", value: 2 },
+        { label: "容易陷入焦虑，难以行动", value: 1 }
+      ]},
+      { text: "在团队中，你常常是？", options: [
+        { label: "带动气氛、提出想法的人", value: 4 },
+        { label: "配合大家、做好自己部分", value: 3 },
+        { label: "默默观察，很少主动发言", value: 2 },
+        { label: "希望别人来安排和带领", value: 1 }
+      ]},
+      { text: "你对自己目前的生活状态满意吗？", options: [
+        { label: "很满意，充满感激", value: 4 },
+        { label: "基本满意，有一些小期待", value: 3 },
+        { label: "一般般，偶尔觉得无聊", value: 2 },
+        { label: "不太满意，想要改变但没动力", value: 1 }
+      ]},
+      { text: "当别人称赞你时，你的感受是？", options: [
+        { label: "开心，觉得自己值得", value: 4 },
+        { label: "有点不好意思，但心里高兴", value: 3 },
+        { label: "怀疑对方是不是客气", value: 2 },
+        { label: "很不自在，想赶快结束话题", value: 1 }
+      ]},
+      { text: "你更喜欢哪种周末安排？", options: [
+        { label: "户外活动或探索新店", value: 4 },
+        { label: "约一两个好友小聚", value: 3 },
+        { label: "宅家看剧、刷手机", value: 2 },
+        { label: "没有计划，随心情", value: 1 }
+      ]},
+      { text: "对于表达自己的需求，你觉得？", options: [
+        { label: "很自然，会直接说出来", value: 4 },
+        { label: "看情况，大部分时候能表达", value: 3 },
+        { label: "有点难为情，尽量不说", value: 2 },
+        { label: "几乎不会表达，怕麻烦别人", value: 1 }
+      ]},
+      { text: "面对失败或挫折，你的恢复速度？", options: [
+        { label: "很快就能调整好心态", value: 4 },
+        { label: "需要几天时间消化", value: 3 },
+        { label: "会低落比较久", value: 2 },
+        { label: "很难走出来，容易自我怀疑", value: 1 }
+      ]},
+      { text: "你觉得自己内心的能量状态更接近？", options: [
+        { label: "像太阳，温暖又有活力", value: 4 },
+        { label: "像月亮，有柔和的光", value: 3 },
+        { label: "像星星，偶尔闪烁", value: 2 },
+        { label: "像云，有时会遮住自己", value: 1 }
+      ]}
+    ];
+
+    // 结果区间 (总分范围 15~60)
+    const resultTypes = [
+      {
+        min: 52, max: 60,
+        title: "🌞 光芒引领者",
+        sub: "你的内在能量非常充沛",
+        desc: "你是一个充满活力和感染力的人，像小太阳一样温暖身边的人。面对挑战时，你总能积极应对，也愿意主动帮助他人。你的自信和乐观是你最大的魅力。不过，也要记得给自己留一些休息的时间，不必时刻都保持高能量。"
+      },
+      {
+        min: 43, max: 51,
+        title: "🌿 温柔治愈者",
+        sub: "你拥有平衡而稳定的能量",
+        desc: "你是一个温和而坚定的人，既有共情力，又有自己的边界。你善于倾听，懂得照顾别人的感受，同时也能很好地处理自己的情绪。你像一阵清风，让人感到舒服和安心。继续保持这种温暖而独立的气质吧。"
+      },
+      {
+        min: 34, max: 42,
+        title: "🌙 静谧探索者",
+        sub: "你的能量偏向内敛但深邃",
+        desc: "你更喜欢独处或与少数亲密的人相处，内心世界丰富而敏感。你善于思考，对事物有自己的见解，但有时会因为思虑过多而消耗能量。学会适当表达自己的需求，偶尔走出舒适区，你会发现更多美好。"
+      },
+      {
+        min: 15, max: 33,
+        title: "☁️ 细腻敏感者",
+        sub: "你的内心柔软且需要被呵护",
+        desc: "你有着非常细腻的感受力，容易被外界影响，能量有时会比较低。这并不代表你不好，而是你需要更多的自我关怀和温柔对待。试着从小事开始建立自信，多和让你放松的人待在一起。记住，你的敏感也是一种天赋。"
+      }
+    ];
+
+    // ---------- DOM 元素 ----------
+    const questionsContainer = document.getElementById('questionsContainer');
+    const quizForm = document.getElementById('quizForm');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const resultArea = document.getElementById('resultArea');
+    const actionButtons = document.getElementById('actionButtons');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultSub = document.getElementById('resultSub');
+    const resultDescription = document.getElementById('resultDescription');
+    const resultResetBtn = document.getElementById('resultResetBtn');
+
+    // 存储用户答案 (按题目索引 0~14, 值为选项value)
+    let userAnswers = new Array(15).fill(null);
+
+    // ---------- 渲染所有题目 ----------
+    function renderQuestions() {
+      let html = '';
+      questionsData.forEach((q, idx) => {
+        html += `<div class="question-item" data-qindex="${idx}">`;
+        html += `<div class="question-text"><span class="q-num">${idx+1}</span> ${q.text}</div>`;
+        html += `<div class="options">`;
+        q.options.forEach((opt, optIdx) => {
+          const uniqueId = `q${idx}_opt${optIdx}`;
+          html += `
+            <label class="option-label" data-qidx="${idx}" data-optidx="${optIdx}" data-value="${opt.value}">
+              <input type="radio" name="q${idx}" value="${opt.value}" id="${uniqueId}">
+              <span>${opt.label}</span>
+            </label>
+          `;
+        });
+        html += `</div></div>`;
+      });
+      questionsContainer.innerHTML = html;
+
+      // 绑定选项点击事件 (使用label点击，确保选中状态)
+      document.querySelectorAll('.option-label').forEach(label => {
+        label.addEventListener('click', function(e) {
+          // 如果点击的是input，交给默认行为，但为了统一处理，我们手动处理
+          // 防止事件重复触发，使用setTimeout或者直接处理
+          // 同时我们需要更新UI选中状态和userAnswers
+          const qIdx = parseInt(this.dataset.qidx);
+          const optValue = parseInt(this.dataset.value);
+          const radioInput = this.querySelector('input[type="radio"]');
+
+          // 如果点击时已经选中，但为了确保，我们仍然重新设置
+          // 阻止默认行为避免两次触发，我们手动选中
+          e.preventDefault();  // 防止label默认行为导致的二次点击？但我们需要选中radio
+
+          // 手动选中radio
+          radioInput.checked = true;
+
+          // 更新userAnswers
+          userAnswers[qIdx] = optValue;
+
+          // 更新UI选中样式
+          updateSelectedStyles(qIdx, optValue);
+
+          // 更新进度条
+          updateProgress();
+
+          // 隐藏错误提示
+          errorMessage.classList.add('hidden');
+        });
+      });
+    }
+
+    // 更新某道题所有选项的高亮样式
+    function updateSelectedStyles(qIdx, selectedValue) {
+      const questionItem = document.querySelector(`.question-item[data-qindex="${qIdx}"]`);
+      if (!questionItem) return;
+      const labels = questionItem.querySelectorAll('.option-label');
+      labels.forEach(label => {
+        const val = parseInt(label.dataset.value);
+        if (val === selectedValue) {
+          label.classList.add('selected');
+        } else {
+          label.classList.remove('selected');
+        }
+      });
+    }
+
+    // 更新进度条和文本
+    function updateProgress() {
+      const answeredCount = userAnswers.filter(v => v !== null).length;
+      progressText.innerText = answeredCount;
+      const percent = (answeredCount / 15) * 100;
+      progressFill.style.width = percent + '%';
+    }
+
+    // 重置所有答案与UI
+    function resetQuiz() {
+      userAnswers = new Array(15).fill(null);
+      // 清除所有radio选中
+      document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+      });
+      // 清除所有selected类
+      document.querySelectorAll('.option-label').forEach(label => {
+        label.classList.remove('selected');
+      });
+      // 更新进度条
+      updateProgress();
+      // 隐藏错误
+      errorMessage.classList.add('hidden');
+      // 显示表单区，隐藏结果区
+      actionButtons.classList.remove('hidden');
+      resultArea.classList.add('hidden');
+      // 确保题目容器可见
+      questionsContainer.classList.remove('hidden');
+      // 重置提交按钮
+      submitBtn.disabled = false;
+    }
+
+    // 显示结果
+    function showResult() {
+      // 计算总分
+      const totalScore = userAnswers.reduce((acc, val) => acc + (val || 0), 0);
+      // 根据总分匹配结果类型
+      let result = resultTypes.find(r => totalScore >= r.min && totalScore <= r.max);
+      if (!result) {
+        // 边缘情况 如果分数低于15 (不可能) 或高于60, 兜底
+        result = totalScore > 51 ? resultTypes[0] : resultTypes[3];
+      }
+
+      // 填充结果内容
+      resultTitle.innerText = result.title;
+      resultSub.innerText = `${result.sub} · 综合能量值 ${totalScore}/60`;
+      resultDescription.innerHTML = `<p>${result.desc}</p>`;
+
+      // 隐藏题目和操作按钮 (题目保留在DOM但隐藏, 或者隐藏整个表单? 这里隐藏题目容器和操作按钮)
+      questionsContainer.classList.add('hidden');
+      actionButtons.classList.add('hidden');
+      // 显示结果区域
+      resultArea.classList.remove('hidden');
+    }
+
+    // 提交处理：验证是否全部作答
+    function handleSubmit() {
+      const unanswered = userAnswers.map((v, i) => v === null ? i+1 : null).filter(v => v !== null);
+      if (unanswered.length > 0) {
+        // 显示错误信息
+        errorMessage.innerText = `🌸 还有 ${unanswered.length} 道题未完成 (第 ${unanswered.join('、')} 题)`;
+        errorMessage.classList.remove('hidden');
+        // 滚动到第一个未答题
+        const firstUnanswered = unanswered[0] - 1;
+        const questionElem = document.querySelector(`.question-item[data-qindex="${firstUnanswered}"]`);
+        if (questionElem) {
+          questionElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+      // 全部已答，隐藏错误，显示结果
+      errorMessage.classList.add('hidden');
+      showResult();
+    }
+
+    // ---------- 事件绑定 ----------
+    function bindEvents() {
+      // 提交按钮
+      submitBtn.addEventListener('click', handleSubmit);
+
+      // 重置按钮 (在表单内)
+      resetBtn.addEventListener('click', function() {
+        resetQuiz();
+        // 滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 结果区的再测一次按钮
+      resultResetBtn.addEventListener('click', function() {
+        resetQuiz();
+        // 额外需要显示题目容器和按钮，隐藏结果区
+        questionsContainer.classList.remove('hidden');
+        actionButtons.classList.remove('hidden');
+        resultArea.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ---------- 初始化 ----------
+    function init() {
+      renderQuestions();
+      bindEvents();
+      resetQuiz(); // 初始化状态，确保全部清空，进度0
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>
